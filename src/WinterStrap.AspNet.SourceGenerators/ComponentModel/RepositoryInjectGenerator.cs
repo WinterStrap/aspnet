@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,8 +30,7 @@ public class RepositoryInjectGenerator:ISourceGenerator
     public void Execute(GeneratorExecutionContext context)
     {
         var compilation = context.Compilation;
-        var attributeSymbol = compilation.GetTypeByMetadataName(
-            "Accolades.Pixelies.Identity.RepositoryDependencyInjectionSourceGenerator.RepositoryInjectAttribute");
+        var attributeSymbol = compilation.GetTypeByMetadataName("WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute.RepositoryInjectAttribute");
         var sourceBuilder = new StringBuilder();
         sourceBuilder.AppendLine("using System;");
         sourceBuilder.AppendLine("using System.Collections.Generic;");
@@ -42,7 +41,7 @@ public class RepositoryInjectGenerator:ISourceGenerator
         sourceBuilder.AppendLine("{");
         sourceBuilder.AppendLine("    public static class RepositoryDependencyInjection");
         sourceBuilder.AppendLine("    {");
-        var lastPart = projectNamespace!.Split('.').Last();
+        //var lastPart = projectNamespace!.Split('.').Last();
         sourceBuilder.AppendLine(
             $"        public static IServiceCollection AddRepositories(this IServiceCollection services)");
         sourceBuilder.AppendLine("        {");
@@ -51,10 +50,10 @@ public class RepositoryInjectGenerator:ISourceGenerator
             var classNamespaceName = typeSymbol.ContainingNamespace.ToDisplayString();
             var className = typeSymbol.Name;
             var interfaceName = typeSymbol.Interfaces.FirstOrDefault(x => x.Name == $"I{className}");
-            if (interfaceName == null)
-            {
-                throw new Exception($"Interface I{className} not found for class {className}");
-            }
+            // if (interfaceName == null)
+            // {
+            //     throw new Exception($"Interface I{className} not found for class {className}");
+            // }
 
             sourceBuilder.AppendLine(
                 $"            services.AddScoped<{interfaceName}, {classNamespaceName}.{className}>();");
