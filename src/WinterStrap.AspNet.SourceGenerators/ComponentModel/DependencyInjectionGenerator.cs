@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Text;
 
@@ -7,6 +7,7 @@ namespace WinterStrap.AspNet.SourceGenerators.ComponentModel;
 /// <summary>
 /// Class to generate dependency injection
 /// </summary>
+
 [Generator]
 public class DependencyInjectionGenerator:ISourceGenerator
 {
@@ -37,7 +38,7 @@ public class DependencyInjectionGenerator:ISourceGenerator
         sourceBuilder.AppendLine("    public static class DependencyInjection");
         sourceBuilder.AppendLine("    {");
         sourceBuilder.AppendLine(
-            $"        public static IServiceCollection ConfigureServices(this IServiceCollection services)");
+            $"        public static IServiceCollection AddDependencies(this IServiceCollection services)");
         
         sourceBuilder.AppendLine("        {");
         sourceBuilder.AppendLine("            services.AddRepositories();");

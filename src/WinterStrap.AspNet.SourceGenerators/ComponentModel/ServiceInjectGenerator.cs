@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -30,8 +30,7 @@ public class ServiceInjectGenerator:ISourceGenerator
      public void Execute(GeneratorExecutionContext context)
     {
         var compilation = context.Compilation;
-        var attributeSymbol = compilation.GetTypeByMetadataName(
-            "Accolades.Pixelies.Identity.RepositoryDependencyInjectionSourceGenerator.ServiceInjectAttribute");
+        var attributeSymbol = compilation.GetTypeByMetadataName("WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute.ServiceInjectAttribute");
         var sourceBuilder = new StringBuilder();
         sourceBuilder.AppendLine("using System;");
         sourceBuilder.AppendLine("using System.Collections.Generic;");
@@ -50,7 +49,7 @@ public class ServiceInjectGenerator:ISourceGenerator
         sourceBuilder.AppendLine("{");
         sourceBuilder.AppendLine("    public static class ServiceDependencyInjection");
         sourceBuilder.AppendLine("    {");
-        var lastPart = projectNamespace!.Split('.').Last();
+        //var lastPart = projectNamespace!.Split('.').Last();
         sourceBuilder.AppendLine(
             $"        public static IServiceCollection AddServices(this IServiceCollection services)");
         sourceBuilder.AppendLine("        {");
