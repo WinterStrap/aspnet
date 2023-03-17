@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute
 {
@@ -8,16 +6,21 @@ namespace WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute
     /// Config Class Attribute
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-    public class ConfigClassAttribute:System.Attribute
+    public class ConfigurationAttribute : System.Attribute
     {
-        private string SectionName { get; set; }
         /// <summary>
         /// Constructor
         /// </summary>
         /// <param name="sectionName"></param>
-        public ConfigClassAttribute(string sectionName)
+        public ConfigurationAttribute(string sectionName)
         {
-            SectionName = sectionName;
+            _sectionName = sectionName;
         }
+
+        private readonly string _sectionName;
+        /// <summary>
+        /// Gets the section name
+        /// </summary>
+        public string SectionName => _sectionName;
     }
 }

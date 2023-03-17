@@ -1,9 +1,9 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using WinterStrap.AspNet.SourceGenerators.ComponentModel;
-using WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
+using WinterStrap.AspNet.ComponentModel.Attributes;
 
 namespace WinterStrap.AspNet.SourceGenerators.UnitTests;
 
@@ -58,7 +58,7 @@ namespace WinterStrap.AspNet.SourceGenerators.UnitTests
         params (string Filename, string Text)[] results)
     {
         // Ensure CommunityToolkit.Mvvm and System.ComponentModel.DataAnnotations are loaded
-        Type repositoryInjectAttribute = typeof(RepositoryInjectAttribute);
+        Type repositoryInjectAttribute = typeof(RepositoryAttribute);
         Type validationAttributeType = typeof(ValidationAttribute);
 
         // Get all assembly references for the loaded assemblies (easy way to pull in all necessary dependencies)

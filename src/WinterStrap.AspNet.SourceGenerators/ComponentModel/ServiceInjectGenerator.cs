@@ -58,11 +58,7 @@ public class ServiceInjectGenerator:ISourceGenerator
             var classNamespaceName = typeSymbol.ContainingNamespace.ToDisplayString();
             var className = typeSymbol.Name;
 
-            var interfaceName = typeSymbol.Interfaces.FirstOrDefault(x => x.Name == $"I{className}");
-            if (interfaceName == null)
-            {
-                throw new Exception($"Interface I{className} not found for class {className}");
-            }
+            var interfaceName = typeSymbol.Interfaces.FirstOrDefault(x => x.Name == $"I{className}") ?? throw new Exception($"Interface I{className} not found for class {className}");
             sourceBuilder.AppendLine(
                 $"            services.AddScoped<{interfaceName}, {classNamespaceName}.{className}>();");
         }

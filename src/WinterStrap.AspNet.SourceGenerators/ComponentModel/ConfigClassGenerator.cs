@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
+﻿using System.Linq;
 using System.Text;
-using System.Threading;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.Extensions.Configuration;
 using WinterStrap.AspNet.SourceGenerators.ComponentModel.Common;
 
 namespace WinterStrap.AspNet.SourceGenerators.ComponentModel;
 
-//Classe pour générer une classe partielle avec les propriétés de configuration de l'application (appsettings.json) à partie d'un attribut [ConfigClass] contenant le nom de la section de configuration à générer
 /// <summary>
 /// Class to generate a partial class with the properties of the application configuration (appsettings.json) from an attribute [ConfigClass]
 /// containing the name of the configuration section to generate
@@ -21,6 +13,10 @@ namespace WinterStrap.AspNet.SourceGenerators.ComponentModel;
 [Generator(LanguageNames.CSharp)]
 public class ConfigClassGenerator : ISourceGenerator
 {
+    /// <summary>
+    /// Execute the generator.
+    /// </summary>
+    /// <param name="context">The generator context.</param>
     public void Execute(GeneratorExecutionContext context)
     {
         var compilation = context.Compilation;
@@ -62,6 +58,10 @@ public class ConfigClassGenerator : ISourceGenerator
             SourceText.From(sourceBuilder.ToString(), Encoding.UTF8));
     }
 
+    /// <summary>
+    /// Initialize the generator.
+    /// </summary>
+    /// <param name="context">The context.</param>
     public void Initialize(GeneratorInitializationContext context)
     {
     }

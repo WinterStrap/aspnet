@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
 
@@ -6,7 +6,7 @@ namespace WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
 /// 
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
-public class RepositoryInjectAttribute:System.Attribute
+public class ServiceAttribute : System.Attribute
 {
     
 }
