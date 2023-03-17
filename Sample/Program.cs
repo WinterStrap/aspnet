@@ -10,6 +10,11 @@ builder.Services.AddSwaggerGen();
 //builder.Services.AddRepositories();
 //builder.Services.ConfigureServices();
 
+
+builder.Services.Configure<MyClasse3>(builder.Configuration.GetSection("ds"));
+
+builder.Services.AddDependencies();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
