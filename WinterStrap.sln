@@ -7,9 +7,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinterStrap.AspNet.SourceGe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinterStrap.AspNet.SourceGenerators.UnitTests", "tests\WinterStrap.AspNet.SourceGenerators.UnitTests\WinterStrap.AspNet.SourceGenerators.UnitTests.csproj", "{B237AD52-2FF6-4D7E-93BB-B2FF77F400B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinterStrap.AspNet", "src\WinterStrap.AspNet\WinterStrap.AspNet.csproj", "{E67BA558-41F4-4CEB-A306-7D744064FBEA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinterStrap.AspNet", "src\WinterStrap.AspNet\WinterStrap.AspNet.csproj", "{E67BA558-41F4-4CEB-A306-7D744064FBEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{AF401606-A7ED-41C7-96A7-50797E081D71}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "samples\WebApp\WebApp.csproj", "{D469BDE2-73B5-4404-AA6E-4A1D05CC03C1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{5CDCD355-1E01-47A3-ADEF-194B504C4D5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{16A600E5-E20A-4494-9F6A-98ACC3F4C80C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,13 +33,19 @@ Global
 		{E67BA558-41F4-4CEB-A306-7D744064FBEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E67BA558-41F4-4CEB-A306-7D744064FBEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E67BA558-41F4-4CEB-A306-7D744064FBEA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF401606-A7ED-41C7-96A7-50797E081D71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF401606-A7ED-41C7-96A7-50797E081D71}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF401606-A7ED-41C7-96A7-50797E081D71}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF401606-A7ED-41C7-96A7-50797E081D71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D469BDE2-73B5-4404-AA6E-4A1D05CC03C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D469BDE2-73B5-4404-AA6E-4A1D05CC03C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D469BDE2-73B5-4404-AA6E-4A1D05CC03C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D469BDE2-73B5-4404-AA6E-4A1D05CC03C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DC27C98C-ED36-472B-B279-9ECFA40B04C2} = {16A600E5-E20A-4494-9F6A-98ACC3F4C80C}
+		{B237AD52-2FF6-4D7E-93BB-B2FF77F400B7} = {16A600E5-E20A-4494-9F6A-98ACC3F4C80C}
+		{E67BA558-41F4-4CEB-A306-7D744064FBEA} = {16A600E5-E20A-4494-9F6A-98ACC3F4C80C}
+		{D469BDE2-73B5-4404-AA6E-4A1D05CC03C1} = {5CDCD355-1E01-47A3-ADEF-194B504C4D5A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15A85E49-0569-4E25-8CBC-9C902947C55A}

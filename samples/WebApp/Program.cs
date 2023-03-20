@@ -1,5 +1,4 @@
-﻿using Sample;
-using Sample.Configurations;
+﻿using WinterStrap.AspNet.Samples.WebApp;
 
 var builder = WebApplication.CreateBuilder(args);
 
