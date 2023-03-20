@@ -1,6 +1,6 @@
 ﻿using WinterStrap.AspNet.ComponentModel.Attributes;
 
-namespace Sample.Configurations;
+namespace WinterStrap.AspNet.Samples.WebApp.Configurations;
 
 /// <summary>
 /// The application configuration.

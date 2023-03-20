@@ -1,4 +1,4 @@
-﻿namespace Sample.Dtos;
+﻿namespace WinterStrap.AspNet.Samples.WebApp.Dtos;
 
 /// <summary>
 /// A weather forecast.

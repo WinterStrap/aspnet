@@ -1,6 +1,6 @@
-﻿using Sample.Dtos;
+﻿using WinterStrap.AspNet.Samples.WebApp.Dtos;
 
-namespace Sample.Repositories
+namespace WinterStrap.AspNet.Samples.WebApp.Repositories
 {
     /// <summary>
     /// A weather repository.

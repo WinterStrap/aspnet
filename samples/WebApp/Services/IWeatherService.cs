@@ -1,6 +1,6 @@
-﻿using Sample.Dtos;
+﻿using WinterStrap.AspNet.Samples.WebApp.Dtos;
 
-namespace Sample.Services
+namespace WinterStrap.AspNet.Samples.WebApp.Services
 {
 
     /// <summary>

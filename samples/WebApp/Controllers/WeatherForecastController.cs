@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Sample.Configurations;
-using Sample.Dtos;
-using Sample.Services;
+using WinterStrap.AspNet.Samples.WebApp.Configurations;
+using WinterStrap.AspNet.Samples.WebApp.Dtos;
+using WinterStrap.AspNet.Samples.WebApp.Services;
 
-namespace Sample.Controllers;
+namespace WinterStrap.AspNet.Samples.WebApp.Controllers;
 
 /// <summary>
 /// Manage weather forecast.

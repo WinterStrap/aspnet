@@ -1,8 +1,8 @@
-﻿using Sample.Dtos;
-using Sample.Repositories;
-using WinterStrap.AspNet.ComponentModel.Attributes;
+﻿using WinterStrap.AspNet.ComponentModel.Attributes;
+using WinterStrap.AspNet.Samples.WebApp.Dtos;
+using WinterStrap.AspNet.Samples.WebApp.Repositories;
 
-namespace Sample.Services
+namespace WinterStrap.AspNet.Samples.WebApp.Services
 {
     /// <summary>
     /// A weather service.
