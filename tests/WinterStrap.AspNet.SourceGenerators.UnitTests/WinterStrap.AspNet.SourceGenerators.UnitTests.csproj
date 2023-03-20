@@ -22,6 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\WinterStrap.AspNet.SourceGenerators\WinterStrap.AspNet.SourceGenerators.csproj" />
+    <ProjectReference Include="..\..\src\WinterStrap.AspNet\WinterStrap.AspNet.csproj" />
   </ItemGroup>
 
 </Project>

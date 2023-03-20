@@ -1,4 +1,4 @@
-﻿using WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
+﻿using WinterStrap.AspNet.ComponentModel.Attributes;
 
 namespace Sample.Configurations;
 

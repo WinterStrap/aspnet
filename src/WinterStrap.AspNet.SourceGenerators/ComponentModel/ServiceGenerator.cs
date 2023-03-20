@@ -12,7 +12,7 @@ namespace WinterStrap.AspNet.SourceGenerators.ComponentModel;
 /// 
 /// </summary>
 [Generator]
-public class ServiceInjectGenerator:ISourceGenerator
+public class ServiceGenerator : ISourceGenerator
 {
     /// <summary>
     /// Method to initialize the generator
@@ -30,7 +30,7 @@ public class ServiceInjectGenerator:ISourceGenerator
      public void Execute(GeneratorExecutionContext context)
     {
         var compilation = context.Compilation;
-        var attributeSymbol = compilation.GetTypeByMetadataName("WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute.ServiceInjectAttribute");
+        var attributeSymbol = compilation.GetTypeByMetadataName("WinterStrap.AspNet.ComponentModel.Attributes.ServiceAttribute");
         var sourceBuilder = new StringBuilder();
         sourceBuilder.AppendLine("using System;");
         sourceBuilder.AppendLine("using System.Collections.Generic;");

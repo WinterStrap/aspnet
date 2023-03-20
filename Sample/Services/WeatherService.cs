@@ -1,6 +1,6 @@
 ﻿using Sample.Dtos;
 using Sample.Repositories;
-using WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
+using WinterStrap.AspNet.ComponentModel.Attributes;
 
 namespace Sample.Services
 {

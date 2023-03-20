@@ -11,7 +11,7 @@ namespace WinterStrap.AspNet.SourceGenerators.ComponentModel;
 /// containing the name of the configuration section to generate
 /// </summary>
 [Generator(LanguageNames.CSharp)]
-public class ConfigClassGenerator : ISourceGenerator
+public class ConfigurationGenerator : ISourceGenerator
 {
     /// <summary>
     /// Execute the generator.
@@ -20,7 +20,7 @@ public class ConfigClassGenerator : ISourceGenerator
     public void Execute(GeneratorExecutionContext context)
     {
         var compilation = context.Compilation;
-        var attributeSymbol = compilation.GetTypeByMetadataName("WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute.ConfigClassAttribute");
+        var attributeSymbol = compilation.GetTypeByMetadataName("WinterStrap.AspNet.ComponentModel.Attributes.ConfigurationAttribute");
 
 
 
@@ -36,12 +36,12 @@ public class ConfigClassGenerator : ISourceGenerator
         sourceBuilder.AppendLine("    public static class CustomConfiguration");
         sourceBuilder.AppendLine("    {");
         sourceBuilder.AppendLine(
-            $"        public static IServiceCollection AddCustomConfiguration(this IServiceCollection services,IConfiguration configuration)");
+            $"        public static IServiceCollection AddConfigurations(this IServiceCollection services, IConfiguration configuration)");
         sourceBuilder.AppendLine("        {");
         foreach (var typeSymbol in CommonMethod.GetTypesWithAttribute(compilation, attributeSymbol!))
         {
             //get the SectionName attribute value
-            var sectionName = typeSymbol.GetAttributes().FirstOrDefault(x => x.AttributeClass?.Name == "ConfigClassAttribute")?.ConstructorArguments.FirstOrDefault().Value.ToString();
+            var sectionName = typeSymbol.GetAttributes().FirstOrDefault(x => x.AttributeClass?.Name == "ConfigurationAttribute")?.ConstructorArguments.FirstOrDefault().Value.ToString();
 
             var classNamespaceName = typeSymbol.ContainingNamespace.ToDisplayString();
             var className = typeSymbol.Name;

@@ -16,8 +16,4 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="7.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\WinterStrap.AspNet\WinterStrap.AspNet.csproj" />
-  </ItemGroup>
-
 </Project>

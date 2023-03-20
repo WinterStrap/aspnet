@@ -38,11 +38,12 @@ public class DependencyInjectionGenerator:ISourceGenerator
         sourceBuilder.AppendLine("    public static class DependencyInjection");
         sourceBuilder.AppendLine("    {");
         sourceBuilder.AppendLine(
-            $"        public static IServiceCollection AddDependencies(this IServiceCollection services)");
+            $"        public static IServiceCollection AddDependencies(this IServiceCollection services, IConfiguration configuration)");
         
         sourceBuilder.AppendLine("        {");
         sourceBuilder.AppendLine("            services.AddRepositories();");
         sourceBuilder.AppendLine("            services.AddServices();");
+        sourceBuilder.AppendLine("            services.AddConfigurations(configuration);");
         sourceBuilder.AppendLine("            return services;");
         sourceBuilder.AppendLine("        }");
         sourceBuilder.AppendLine("    }");

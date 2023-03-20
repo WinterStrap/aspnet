@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute
+namespace WinterStrap.AspNet.ComponentModel.Attributes
 {
     /// <summary>
     /// Config Class Attribute
