@@ -1,9 +1,9 @@
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
+using WinterStrap.AspNet.ComponentModel.Attributes;
 using WinterStrap.AspNet.SourceGenerators.ComponentModel;
-using WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
 
 namespace WinterStrap.AspNet.SourceGenerators.UnitTests;
 
@@ -16,14 +16,14 @@ public class TestRepositoryInjection
         var source = @"
 
 using System;
-using WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
+using WinterStrap.AspNet.ComponentModel.Attributes;
 
 namespace WinterStrap.AspNet.SourceGenerators.UnitTests
 {
-    [RepositoryInject]
-    public class Test_RepositoryInjection: IRepositoryDependencyInjection
+    [Repository]
+    public class RepositoryDependencyInjection: IRepositoryDependencyInjection
     {
-        public Test_RepositoryInjection()
+        public RepositoryDependencyInjection()
         {
         }
     }
@@ -44,21 +44,20 @@ namespace WinterStrap.AspNet.SourceGenerators.UnitTests
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<WinterStrap.AspNet.SourceGenerators.UnitTests.IRepositoryDependencyInjection, WinterStrap.AspNet.SourceGenerators.UnitTests.Test_RepositoryInjection>();
+            services.AddScoped<WinterStrap.AspNet.SourceGenerators.UnitTests.IRepositoryDependencyInjection, WinterStrap.AspNet.SourceGenerators.UnitTests.RepositoryDependencyInjection>();
               return services;
         }
     }
 }
 ";
-        VerifyGeneratedCode(source, new ISourceGenerator[] { new RepositoryInjectGenerator() },
-            ("RepositoryDependencyInjection.cs", result));
+        VerifyGeneratedCode(source, new ISourceGenerator[] { new RepositoryGenerator() }, ("RepositoryDependencyInjection.generated.cs", result));
     }
 
     private static void VerifyGeneratedCode(string source, ISourceGenerator[] generators,
         params (string Filename, string Text)[] results)
     {
         // Ensure CommunityToolkit.Mvvm and System.ComponentModel.DataAnnotations are loaded
-        Type repositoryInjectAttribute = typeof(RepositoryInjectAttribute);
+        Type repositoryInjectAttribute = typeof(RepositoryAttribute);
         Type validationAttributeType = typeof(ValidationAttribute);
 
         // Get all assembly references for the loaded assemblies (easy way to pull in all necessary dependencies)
@@ -67,17 +66,15 @@ namespace WinterStrap.AspNet.SourceGenerators.UnitTests
             where !assembly.IsDynamic
             let reference = MetadataReference.CreateFromFile(assembly.Location)
             select reference;
-
-        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source,
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10));
+        
+        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source, CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10));
 
         // Create a syntax tree with the input source
-        CSharpCompilation compilation = CSharpCompilation.Create(
-            "original",
+        CSharpCompilation compilation = CSharpCompilation.Create("original",
             new SyntaxTree[] { syntaxTree },
             references,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-
+        
         GeneratorDriver driver = CSharpGeneratorDriver.Create(generators)
             .WithUpdatedParseOptions((CSharpParseOptions)syntaxTree.Options);
 

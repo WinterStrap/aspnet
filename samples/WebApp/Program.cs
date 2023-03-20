@@ -1,19 +1,13 @@
-﻿using Sample;
-var builder = WebApplication.CreateBuilder(args);
+﻿using WinterStrap.AspNet.Samples.WebApp;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddRepositories();
-//builder.Services.ConfigureServices();
 
-
-builder.Services.Configure<MyClasse3>(builder.Configuration.GetSection("ds"));
-
-builder.Services.AddDependencies();
+builder.Services.AddDependencies(builder.Configuration);
 
 var app = builder.Build();
 
