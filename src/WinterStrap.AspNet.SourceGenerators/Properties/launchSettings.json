@@ -2,7 +2,11 @@
   "profiles": {
     "Source Generators": {
       "commandName": "DebugRoslynComponent",
-      "targetProject": "..\\..\\Sample\\Sample.csproj"
+      "targetProject": "..\\..\\samples\\WebApp\\WebApp.csproj"
+    },
+    "Profile 2": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\..\\InfrastructureSample\\InfrastructureSample.csproj"
     }
   }
 }

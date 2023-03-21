@@ -16,14 +16,14 @@ public class TestRepositoryInjection
         var source = @"
 
 using System;
-using WinterStrap.AspNet.ComponentModel.Attributes;
+using WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
 
 namespace WinterStrap.AspNet.SourceGenerators.UnitTests
 {
-    [Repository]
-    public class RepositoryDependencyInjection: IRepositoryDependencyInjection
+    [RepositoryInject]
+    public class Test_RepositoryInjection: IRepositoryDependencyInjection
     {
-        public RepositoryDependencyInjection()
+        public Test_RepositoryInjection()
         {
         }
     }
@@ -44,13 +44,14 @@ namespace WinterStrap.AspNet.SourceGenerators.UnitTests
     {
         public static IServiceCollection AddRepositories(this IServiceCollection services)
         {
-            services.AddScoped<WinterStrap.AspNet.SourceGenerators.UnitTests.IRepositoryDependencyInjection, WinterStrap.AspNet.SourceGenerators.UnitTests.RepositoryDependencyInjection>();
+            services.AddScoped<WinterStrap.AspNet.SourceGenerators.UnitTests.IRepositoryDependencyInjection, WinterStrap.AspNet.SourceGenerators.UnitTests.Test_RepositoryInjection>();
               return services;
         }
     }
 }
 ";
-        VerifyGeneratedCode(source, new ISourceGenerator[] { new RepositoryGenerator() }, ("RepositoryDependencyInjection.generated.cs", result));
+        VerifyGeneratedCode(source, new ISourceGenerator[] { new RepositoryGenerator() },
+            ("RepositoryDependencyInjection.cs", result));
     }
 
     private static void VerifyGeneratedCode(string source, ISourceGenerator[] generators,
@@ -60,21 +61,29 @@ namespace WinterStrap.AspNet.SourceGenerators.UnitTests
         Type repositoryInjectAttribute = typeof(RepositoryAttribute);
         Type validationAttributeType = typeof(ValidationAttribute);
 
+        //set project namespace
+        var projectNamespace = "WinterStrap.AspNet.SourceGenerators.UnitTests";
+
+
         // Get all assembly references for the loaded assemblies (easy way to pull in all necessary dependencies)
         IEnumerable<MetadataReference> references =
             from assembly in AppDomain.CurrentDomain.GetAssemblies()
             where !assembly.IsDynamic
             let reference = MetadataReference.CreateFromFile(assembly.Location)
             select reference;
-        
-        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source, CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10));
+
+        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source,
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10));
 
         // Create a syntax tree with the input source
-        CSharpCompilation compilation = CSharpCompilation.Create("original",
+        CSharpCompilation compilation = CSharpCompilation.Create(
+            "original",
             new SyntaxTree[] { syntaxTree },
             references,
             new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+
         
+
         GeneratorDriver driver = CSharpGeneratorDriver.Create(generators)
             .WithUpdatedParseOptions((CSharpParseOptions)syntaxTree.Options);
 
