@@ -13,6 +13,7 @@ internal abstract class CommonMethod
     {
         if (namespaceSymbol is INamespaceSymbol ns)
         {
+            var data=ns.GetMembers();
             foreach (var member in ns.GetMembers())
             {
                 foreach (var type in GetAllTypes(member))
@@ -40,10 +41,44 @@ internal abstract class CommonMethod
             .Any(x => x.AttributeClass!.Equals(attributeSymbol, SymbolEqualityComparer.Default));
     }
 
+    private static IEnumerable<INamedTypeSymbol>? GetExternAssemblyTypesWithAttribute(Compilation compilation,
+        INamedTypeSymbol attributeSymbol)
+    {
+        //get assembly names of referenced assemblies of referenced projet without public key
+        var assemblyNames= compilation.ReferencedAssemblyNames.Where(x=>!x.HasPublicKey).Select(x=>x.Name);
+
+        foreach (var assemblyName in assemblyNames)
+            {
+                var assembly = compilation.References
+                    .Select(x => compilation.GetAssemblyOrModuleSymbol(x) as IAssemblySymbol)
+                    .Where(x => x != null)
+                    .FirstOrDefault(x => x!.Name == assemblyName);
+                if (assembly != null)
+                {
+                    foreach (var typeSymbol in GetAllTypes(assembly.GlobalNamespace))
+                    {
+                        if (HasAttribute(typeSymbol, attributeSymbol))
+                        {
+                            yield return typeSymbol;
+                        }
+                    }
+                }
+            }
+    }
+    
     internal static IEnumerable<INamedTypeSymbol> GetTypesWithAttribute(Compilation compilation,
         INamedTypeSymbol attributeSymbol)
     {
-        return GetAllTypes(compilation.Assembly.GlobalNamespace)
+        var types = GetAllTypes(compilation.Assembly.GlobalNamespace)
             .Where(x => HasAttribute(x, attributeSymbol));
+        var externTypes = GetExternAssemblyTypesWithAttribute(compilation, attributeSymbol);
+
+        if (externTypes.Any())
+        {
+            types = types.Concat(externTypes);
+        }
+        return types;
     }
+
+
 }

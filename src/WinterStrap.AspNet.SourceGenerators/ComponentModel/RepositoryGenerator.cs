@@ -20,6 +20,7 @@ public class RepositoryGenerator : ISourceGenerator
     /// <param name="context"></param>
     public void Initialize(GeneratorInitializationContext context)
     {
+        //var fss=context.
     }
 
     /// <summary>
