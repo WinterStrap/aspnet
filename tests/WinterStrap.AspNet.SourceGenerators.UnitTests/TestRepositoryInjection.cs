@@ -16,93 +16,34 @@ public class TestRepositoryInjection
         var source = @"
 
 using System;
-using WinterStrap.AspNet.SourceGenerators.ComponentModel.Attribute;
+using WinterStrap.AspNet.ComponentModel.Attributes;
 
 namespace WinterStrap.AspNet.SourceGenerators.UnitTests
 {
-    [RepositoryInject]
-    public class Test_RepositoryInjection: IRepositoryDependencyInjection
+    [Repository]
+    public class Test_RepositoryInjection: ITest_RepositoryInjection
     {
         public Test_RepositoryInjection()
         {
         }
     }
 
-    public interface IRepositoryDependencyInjection
+    public interface ITest_RepositoryInjection
     {
     }
 }
 ";
-        var result = @"
-using System;
-using System.Collections.Generic;
-using Microsoft.Extensions.DependencyInjection;
+        //value to check
+        string[] valueToCheck ={
+            "public static IServiceCollection AddRepositories(this IServiceCollection services)",
+            "services.AddScoped<WinterStrap.AspNet.SourceGenerators.UnitTests.ITest_RepositoryInjection, WinterStrap.AspNet.SourceGenerators.UnitTests.Test_RepositoryInjection>();",
+            "return services;"
+        };
 
-namespace WinterStrap.AspNet.SourceGenerators.UnitTests
-{
-    public static class RepositoryDependencyInjection
-    {
-        public static IServiceCollection AddRepositories(this IServiceCollection services)
-        {
-            services.AddScoped<WinterStrap.AspNet.SourceGenerators.UnitTests.IRepositoryDependencyInjection, WinterStrap.AspNet.SourceGenerators.UnitTests.Test_RepositoryInjection>();
-              return services;
-        }
-    }
-}
-";
-        VerifyGeneratedCode(source, new ISourceGenerator[] { new RepositoryGenerator() },
-            ("RepositoryDependencyInjection.cs", result));
+        CommonTestMethode.VerifyGeneratedCode(source, new ISourceGenerator[] { new RepositoryGenerator() },
+            "RepositoryDependencyInjection.generated.cs", valueToCheck);
     }
 
-    private static void VerifyGeneratedCode(string source, ISourceGenerator[] generators,
-        params (string Filename, string Text)[] results)
-    {
-        // Ensure CommunityToolkit.Mvvm and System.ComponentModel.DataAnnotations are loaded
-        Type repositoryInjectAttribute = typeof(RepositoryAttribute);
-        Type validationAttributeType = typeof(ValidationAttribute);
-
-        //set project namespace
-        var projectNamespace = "WinterStrap.AspNet.SourceGenerators.UnitTests";
-
-
-        // Get all assembly references for the loaded assemblies (easy way to pull in all necessary dependencies)
-        IEnumerable<MetadataReference> references =
-            from assembly in AppDomain.CurrentDomain.GetAssemblies()
-            where !assembly.IsDynamic
-            let reference = MetadataReference.CreateFromFile(assembly.Location)
-            select reference;
-
-        SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(source,
-            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp10));
-
-        // Create a syntax tree with the input source
-        CSharpCompilation compilation = CSharpCompilation.Create(
-            "original",
-            new SyntaxTree[] { syntaxTree },
-            references,
-            new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
-
-        
-
-        GeneratorDriver driver = CSharpGeneratorDriver.Create(generators)
-            .WithUpdatedParseOptions((CSharpParseOptions)syntaxTree.Options);
-
-        // Run all source generators on the input source code
-        _ = driver.RunGeneratorsAndUpdateCompilation(compilation, out Compilation outputCompilation,
-            out ImmutableArray<Diagnostic> diagnostics);
-
-        // Ensure that no diagnostics were generated
-        //CollectionAssert.AreEquivalent(Array.Empty<Diagnostic>(), diagnostics);
-
-        foreach ((string filename, string text) in results)
-        {
-            SyntaxTree generatedTree =
-                outputCompilation.SyntaxTrees.Single(tree => Path.GetFileName(tree.FilePath) == filename);
-
-            Assert.AreEqual(text, generatedTree.ToString());
-        }
-
-        GC.KeepAlive(repositoryInjectAttribute);
-        GC.KeepAlive(validationAttributeType);
-    }
+    
+    
 }
