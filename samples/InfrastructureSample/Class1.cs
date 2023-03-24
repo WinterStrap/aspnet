@@ -1,7 +1,13 @@
-﻿namespace InfrastructureSample
+﻿using WinterStrap.AspNet.ComponentModel.Attributes;
+
+namespace InfrastructureSample
 {
-    public class Class1
+    [Service]
+    internal class AppService:IAppService
     {
 
     }
+
+    public interface IAppService
+    { }
 }

@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinterStrap.AspNet", "src\W
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApp", "samples\WebApp\WebApp.csproj", "{976B9FB0-4C51-4506-AFB2-6169B471BB5F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureSample", "samples\InfrastructureSample\InfrastructureSample.csproj", "{5758011F-D319-4E6C-941F-A4A215E86E5F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureSample", "samples\InfrastructureSample\InfrastructureSample.csproj", "{5758011F-D319-4E6C-941F-A4A215E86E5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppServiceLib", "samples\AppServiceLib\AppServiceLib.csproj", "{04AF83E9-4CF8-4957-8A8D-52B5F4228544}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{5758011F-D319-4E6C-941F-A4A215E86E5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5758011F-D319-4E6C-941F-A4A215E86E5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5758011F-D319-4E6C-941F-A4A215E86E5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04AF83E9-4CF8-4957-8A8D-52B5F4228544}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04AF83E9-4CF8-4957-8A8D-52B5F4228544}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04AF83E9-4CF8-4957-8A8D-52B5F4228544}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04AF83E9-4CF8-4957-8A8D-52B5F4228544}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
