@@ -42,7 +42,7 @@ public class RepositoryGenerator : ISourceGenerator
             out var projectNamespace);
         sourceBuilder.AppendLine($"namespace {projectNamespace!}");
         sourceBuilder.AppendLine("{");
-        sourceBuilder.AppendLine("    public static class RepositoryDependencyInjection");
+        sourceBuilder.AppendLine("    internal static class RepositoryDependencyInjection");
         sourceBuilder.AppendLine("    {");
         //var lastPart = projectNamespace!.Split('.').Last();
         sourceBuilder.AppendLine(

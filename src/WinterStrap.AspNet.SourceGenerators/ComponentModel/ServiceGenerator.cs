@@ -49,7 +49,7 @@ public class ServiceGenerator : ISourceGenerator
 
         sourceBuilder.AppendLine($"namespace {projectNamespace!}");
         sourceBuilder.AppendLine("{");
-        sourceBuilder.AppendLine("    public static class ServiceDependencyInjection");
+        sourceBuilder.AppendLine("    internal static class ServiceDependencyInjection");
         sourceBuilder.AppendLine("    {");
         //var lastPart = projectNamespace!.Split('.').Last();
         sourceBuilder.AppendLine(
