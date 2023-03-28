@@ -8,6 +8,9 @@ using WinterStrap.AspNet.SourceGenerators.ComponentModel.Common;
 
 namespace WinterStrap.AspNet.SourceGenerators.ComponentModel;
 
+/// <summary>
+/// Class who generate a module for external libraries.
+/// </summary>
 [Generator]
 public class ModuleGenerator : ISourceGenerator
 {
@@ -53,6 +56,10 @@ public class ModuleGenerator : ISourceGenerator
             SourceText.From(sourceBuilder.ToString(), Encoding.UTF8));
     }
 
+    /// <summary>
+    /// Initialize the generator.
+    /// </summary>
+    /// <param name="context">The generator context.</param>
     public void Initialize(GeneratorInitializationContext context)
     {
     }
