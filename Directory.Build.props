@@ -8,8 +8,9 @@
   <PropertyGroup>
     <RepositoryDirectory>$(MSBuildThisFileDirectory)</RepositoryDirectory>
     <BuildToolsDirectory>$(RepositoryDirectory)build\</BuildToolsDirectory>
-    <IsTestProject>$(MSBuildProjectName.Contains('Test'))</IsTestProject>
-    <IsCoreProject Condition="$(IsTestProject)">False</IsCoreProject>
+    <IsSampleProject>$(MSBuildProjectDirectory.Contains('samples'))</IsSampleProject>
+    <IsTestProject>$(MSBuildProjectDirectory.Contains('tests'))</IsTestProject>
+    <IsCoreProject Condition="$(IsTestProject) Or $(IsSampleProject)">False</IsCoreProject>
     <IsCoreProject Condition="'$(IsCoreProject)' == ''">True</IsCoreProject>
   </PropertyGroup>
 
